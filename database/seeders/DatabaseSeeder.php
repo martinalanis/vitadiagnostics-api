@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
     ]);
     User::create([
       'nombre'    =>  'Administrador',
-      'apellido'  =>  'General',
       'email'     =>  'admin@vita.com',
       'rol_id'    =>  1,
       'password'  =>  bcrypt('123456'),
