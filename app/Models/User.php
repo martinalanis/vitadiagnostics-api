@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -29,6 +30,7 @@ class User extends Authenticatable implements JWTSubject
     'municipio',
     'estatus',
     'rol_id',
+    'password',
   ];
 
   /**
@@ -57,5 +59,28 @@ class User extends Authenticatable implements JWTSubject
   public function getJWTCustomClaims()
   {
     return [];
+  }
+
+  public function Rol()
+  {
+    return $this->belongsTo('\App\Models\Rol');
+  }
+
+  /**
+   * Mutations
+   */
+  public function setPasswordAttribute($value)
+  {
+    $this->attributes['password'] = Hash::make($value);
+  }
+
+  public function setEmailAttribute($value)
+  {
+    $this->attributes['email'] = strtolower($value);
+  }
+
+  public function setTelefonoAttribute($value)
+  {
+    $this->attributes['telefono'] = str_replace(['-', ' '], "", $value);
   }
 }
