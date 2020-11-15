@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RefaccionController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 });
 
 Route::apiResource('users', UserController::class);
-Route::apiResource('roles', RolController::class );
+Route::apiResource('refacciones', RefaccionController::class )
+  ->parameter('refacciones', 'refaccion');
+Route::apiResource('roles', RolController::class )
+  ->parameter('roles', 'rol');
 
 Route::post('admin-confirm', [AuthController::class, 'adminVerify']);
 Route::post('change-password/{user}', [AuthController::class, 'changePassword']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -62,19 +62,16 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    // $validator = Validator::make($request->all(), [
-    //   'name' => 'required',
-    //   'email' => [
-    //     'required',
-    //     Rule::unique('users')->ignore($user->id),
-    //   ],
-    //   'type' => 'required'
-    // ], [
-    //   'email.unique' => 'Esta cuenta de correo ya existe, intenta con una diferente',
-    //   'name.required' => 'El nombre es requerido',
-    //   'email.required' => 'El email es requerido',
-    //   'type.required' => 'El tipo de usuario es requerido'
-    // ]);
+    $this->validate($request, [
+      'email' => [
+        'required',
+        Rule::unique('users')->ignore($user->id),
+      ]
+    ], [
+      'email.unique' => 'Esta cuenta de correo ya existe, intenta con una diferente',
+      'email.email' => 'Formato de email no válido',
+    ]);
+
     $user->fill($request->all());
     if ($user->save()) {
       return response()->json($this->messages['update.success'], 200);
