@@ -90,6 +90,9 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    if ($user->delete()) {
+      return response()->json($this->messages['delete.success'], 200);
+    }
+    return response()->json($this->messages['delete.fail'], Response::HTTP_CONFLICT);
   }
 }

@@ -9,7 +9,7 @@ class AuthController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login']]);
+    $this->middleware('auth:api', ['except' => ['login', 'adminVerify']]);
   }
 
   public function login(Request $request)
@@ -34,6 +34,17 @@ class AuthController extends Controller
   public function refresh()
   {
     return $this->respondWithToken(auth()->refresh());
+  }
+
+  public function adminVerify(Request $request)
+  {
+    /**
+     * Validar via token que la contraseña sea valida para el usuario que envia la peticion
+     */
+    if (true) {
+      return response()->json(['success' => true], 200);
+    }
+    return response()->json(['message' => 'Contraseña incorrecta'], Response::HTTP_FORBIDDEN);
   }
 
   protected function respondWithToken($token)

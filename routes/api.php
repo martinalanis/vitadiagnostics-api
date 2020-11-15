@@ -30,3 +30,5 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 Route::apiResource('users', UserController::class);
 Route::apiResource('roles', RolController::class );
+
+Route::post('admin-confirm', [AuthController::class, 'adminVerify']);
