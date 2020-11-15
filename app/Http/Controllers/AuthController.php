@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -9,7 +10,7 @@ class AuthController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login', 'adminVerify']]);
+    $this->middleware('auth:api', ['except' => ['login', 'adminVerify', 'changePassword']]);
   }
 
   public function login(Request $request)
@@ -45,6 +46,15 @@ class AuthController extends Controller
       return response()->json(['success' => true], 200);
     }
     return response()->json(['message' => 'Contraseña incorrecta'], Response::HTTP_FORBIDDEN);
+  }
+
+  public function changePassword(Request $request, User $user)
+  {
+    $user->password = $request->password;
+    if ($user->save()) {
+      return response()->json('La contraseña se actualizo correctamente', 200);
+    }
+    return response()->json(['message' => 'No se pudo actualizar la contraseña'], Response::HTTP_CONFLICT);
   }
 
   protected function respondWithToken($token)

@@ -32,3 +32,4 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('roles', RolController::class );
 
 Route::post('admin-confirm', [AuthController::class, 'adminVerify']);
+Route::post('change-password/{user}', [AuthController::class, 'changePassword']);
