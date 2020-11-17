@@ -38,3 +38,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     ->parameter('roles', 'rol');
   Route::post('change-password/{user}', [AuthController::class, 'changePassword']);
 });
+
+Route::fallback(function () {
+  return response()->json([
+    'message' => 'Recurso no encontrado'
+  ], 404);
+});
