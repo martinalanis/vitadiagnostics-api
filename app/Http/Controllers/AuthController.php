@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -45,7 +46,9 @@ class AuthController extends Controller
     /**
      * Validar via token que la contraseña sea valida para el usuario que envia la peticion
      */
-    if (true) {
+    // $valid = auth()->user()->password;
+    $valid = Hash::check($request->password, auth()->user()->password);
+    if ($valid) {
       return response()->json(['success' => true], 200);
     }
     return response()->json(['message' => 'Contraseña incorrecta'], Response::HTTP_FORBIDDEN);
