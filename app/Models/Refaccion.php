@@ -9,7 +9,7 @@ class Refaccion extends Model
 {
     use HasFactory;
 
-    protected $table = 'Refacciones';
+    protected $table = 'refacciones';
 
     protected $fillable = [
       'nombre',

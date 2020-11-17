@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login', 'adminVerify', 'changePassword']]);
+    $this->middleware('auth:api', ['except' => ['login']]);
   }
 
   public function login(Request $request)
@@ -24,7 +24,10 @@ class AuthController extends Controller
   public function logout()
   {
     auth()->logout();
-    return response()->json(['message' => 'Successfully logged out']);
+    if (!auth()->check()) {
+      return response()->json('Sesión cerrada correctamente', 200);
+    }
+    return response()->json(['message' => 'No se pudo cerrar la sesión'], Response::HTTP_CONFLICT);
   }
 
   public function me()

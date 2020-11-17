@@ -14,6 +14,10 @@ class UserController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+  // public function __construct()
+  // {
+  //   $this->middleware('auth:api', ['except' => ['store']]);
+  // }
   public function index()
   {
     return response()->json(User::with('rol')->get(), 200);

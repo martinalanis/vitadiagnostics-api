@@ -26,14 +26,15 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
   Route::post('login', [AuthController::class, 'login']);
   Route::post('logout', [AuthController::class, 'logout']);
   Route::post('refresh', [AuthController::class, 'refresh']);
-  Route::post('me', [AuthController::class, 'me']);
+  Route::get('me', [AuthController::class, 'me']);
+  Route::post('admin-confirm', [AuthController::class, 'adminVerify']);
 });
 
-Route::apiResource('users', UserController::class);
-Route::apiResource('refacciones', RefaccionController::class )
-  ->parameter('refacciones', 'refaccion');
-Route::apiResource('roles', RolController::class )
-  ->parameter('roles', 'rol');
-
-Route::post('admin-confirm', [AuthController::class, 'adminVerify']);
-Route::post('change-password/{user}', [AuthController::class, 'changePassword']);
+Route::group(['middleware' => 'auth:api'], function () {
+  Route::apiResource('users', UserController::class);
+  Route::apiResource('refacciones', RefaccionController::class )
+    ->parameter('refacciones', 'refaccion');
+  Route::apiResource('roles', RolController::class )
+    ->parameter('roles', 'rol');
+  Route::post('change-password/{user}', [AuthController::class, 'changePassword']);
+});
