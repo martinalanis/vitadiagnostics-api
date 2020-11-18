@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\RefaccionController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth:api'], function () {
   Route::apiResource('users', UserController::class);
+  Route::apiResource('clientes', ClienteController::class);
   Route::apiResource('refacciones', RefaccionController::class )
     ->parameter('refacciones', 'refaccion');
   Route::apiResource('roles', RolController::class )
