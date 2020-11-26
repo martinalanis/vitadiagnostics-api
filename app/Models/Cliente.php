@@ -20,4 +20,11 @@ class Cliente extends Model
       'estado',
       'municipio'
     ];
+
+    protected $with = ['equiposMedicos'];
+
+    public function equiposMedicos()
+    {
+      return $this->hasMany('\App\Models\EquipoMedico');
+    }
 }

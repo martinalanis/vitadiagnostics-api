@@ -18,6 +18,6 @@ class Modalidad extends Model
 
     public function eqiposMedicos()
     {
-      return $this->hasMany('\App\Models\Modalidad');
+      return $this->hasMany('\App\Models\EquipoMedico');
     }
 }

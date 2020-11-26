@@ -20,6 +20,8 @@ class EquipoMedico extends Model
     'modalidad_id',
   ];
 
+  protected $with = ['modalidad'];
+
   public function cliente()
   {
     return $this->belongsTo('\App\Models\Cliente');
