@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EquipoMedicoController;
 use App\Http\Controllers\RefaccionController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
@@ -38,6 +39,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     ->parameter('refacciones', 'refaccion');
   Route::apiResource('roles', RolController::class )
     ->parameter('roles', 'rol');
+  Route::get('/equipos-medicos/modalidades', [EquipoMedicoController::class, 'getModalidades']);
+  Route::apiResource('equipos-medicos', EquipoMedicoController::class)
+    ->parameter('equipos-medicos', 'equipoMedico');
   Route::post('change-password/{user}', [AuthController::class, 'changePassword']);
 });
 
