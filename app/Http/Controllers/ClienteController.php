@@ -15,7 +15,7 @@ class ClienteController extends Controller
    */
   public function index()
   {
-    return response()->json(Cliente::all(), 200);
+    return response()->json(Cliente::with('equiposMedicos')->get(), 200);
   }
 
   /**
@@ -80,5 +80,10 @@ class ClienteController extends Controller
       return response()->json($this->messages['delete.success'], 200);
     }
     return response()->json($this->messages['delete.fail'], Response::HTTP_CONFLICT);
+  }
+
+  public function clientList(Type $var = null)
+  {
+    return response()->json(Cliente::select(['id', 'nombre'])->get(), 200);
   }
 }

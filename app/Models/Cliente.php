@@ -21,7 +21,7 @@ class Cliente extends Model
       'municipio'
     ];
 
-    protected $with = ['equiposMedicos'];
+    // protected $with = ['equiposMedicos'];
 
     public function equiposMedicos()
     {

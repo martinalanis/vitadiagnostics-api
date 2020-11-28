@@ -34,6 +34,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth:api'], function () {
   Route::apiResource('users', UserController::class);
+  Route::get('/clientes/list', [ClienteController::class, 'clientList']);
   Route::apiResource('clientes', ClienteController::class);
   Route::apiResource('refacciones', RefaccionController::class )
     ->parameter('refacciones', 'refaccion');

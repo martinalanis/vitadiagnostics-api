@@ -16,7 +16,7 @@ class EquipoMedicoController extends Controller
    */
   public function index()
   {
-    //
+    return response()->json(EquipoMedico::with('cliente')->get(), 200);
   }
 
   /**
@@ -44,7 +44,7 @@ class EquipoMedicoController extends Controller
    */
   public function show(EquipoMedico $equipoMedico)
   {
-    //
+    return response()->json($equipoMedico, 200);
   }
 
   /**
@@ -56,7 +56,11 @@ class EquipoMedicoController extends Controller
    */
   public function update(Request $request, EquipoMedico $equipoMedico)
   {
-    //
+    $equipoMedico->fill($request->all());
+    if ($equipoMedico->save()) {
+      return response()->json($this->messages['update.success'], 200);
+    }
+    return response()->json($this->messages['update.fail'], Response::HTTP_CONFLICT);
   }
 
   /**
@@ -67,7 +71,10 @@ class EquipoMedicoController extends Controller
    */
   public function destroy(EquipoMedico $equipoMedico)
   {
-    //
+    if ($equipoMedico->delete()) {
+      return response()->json($this->messages['delete.success'], 200);
+    }
+    return response()->json($this->messages['delete.fail'], Response::HTTP_CONFLICT);
   }
 
   public function getModalidades()
