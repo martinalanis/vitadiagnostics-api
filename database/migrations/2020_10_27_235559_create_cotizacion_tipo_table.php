@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRefaccionesTable extends Migration
+class CreateCotizacionTipoTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRefaccionesTable extends Migration
    */
   public function up()
   {
-    Schema::create('refacciones', function (Blueprint $table) {
+    Schema::create('cotizacion_tipo', function (Blueprint $table) {
       $table->id();
       $table->string('nombre');
-      $table->string('modelo');
-      $table->string('serie');
+      $table->string('tag');
       $table->timestamps();
     });
   }
@@ -29,6 +28,6 @@ class CreateRefaccionesTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('refacciones');
+    Schema::dropIfExists('cotizacion_tipo');
   }
 }

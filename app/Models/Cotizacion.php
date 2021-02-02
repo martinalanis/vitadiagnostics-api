@@ -14,8 +14,25 @@ class Cotizacion extends Model
   protected $fillable = [
     'cliente_id',
     'user_id',
-    'tipo',
+    'tipo_id',
     'fecha',
     'status',
   ];
+
+  protected $with = ['tipo', 'cliente', 'user'];
+
+  public function tipo()
+  {
+      return $this->belongsTo('App\Models\CotizacionTipo', 'tipo_id');
+  }
+
+  public function cliente()
+  {
+      return $this->belongsTo('App\Models\Cliente');
+  }
+
+  public function user()
+  {
+      return $this->belongsTo('App\Models\User');
+  }
 }

@@ -7,24 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-      'nombre',
-      'razon_social',
-      'email',
-      'telefonos',
-      'rfc',
-      'direccion',
-      'cp',
-      'estado',
-      'municipio'
-    ];
+  protected $fillable = [
+    'nombre',
+    'razon_social',
+    'email',
+    'telefonos',
+    'rfc',
+    'direccion',
+    'cp',
+    'estado',
+    'municipio'
+  ];
 
-    // protected $with = ['equiposMedicos'];
+  // protected $with = ['equiposMedicos'];
 
-    public function equiposMedicos()
-    {
-      return $this->hasMany('\App\Models\EquipoMedico');
-    }
+  public function equiposMedicos()
+  {
+    return $this->hasMany('\App\Models\EquipoMedico');
+  }
 }

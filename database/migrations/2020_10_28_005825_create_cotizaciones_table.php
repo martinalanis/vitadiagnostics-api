@@ -17,11 +17,12 @@ class CreateCotizacionesTable extends Migration
       $table->id();
       $table->bigInteger('cliente_id')->unsigned()->nullable();
       $table->bigInteger('user_id')->unsigned()->nullable();
-      $table->string('tipo');
+      $table->bigInteger('tipo_id')->unsigned()->nullable();
       $table->date('fecha');
       $table->string('estatus');
       $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('set null')->onUpdate('cascade');
       $table->foreign('user_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
+      $table->foreign('tipo_id')->references('id')->on('cotizacion_tipo')->onDelete('set null')->onUpdate('cascade');
       $table->timestamps();
     });
   }

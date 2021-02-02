@@ -7,14 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Refaccion extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'refacciones';
+  protected $table = 'refacciones';
 
-    protected $fillable = [
-      'nombre',
-      'modelo',
-      'serie',
-    ];
+  protected $fillable = [
+    'nombre',
+    'num_parte',
+    'modalidad_id',
+  ];
 
+  protected $with = ['modalidad'];
+
+  public function modalidad()
+  {
+    return $this->belongsTo('\App\Models\Modalidad');
+  }
 }
