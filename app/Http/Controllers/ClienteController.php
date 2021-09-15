@@ -82,7 +82,7 @@ class ClienteController extends Controller
     return response()->json($this->messages['delete.fail'], Response::HTTP_CONFLICT);
   }
 
-  public function clientList(Type $var = null)
+  public function clientList()
   {
     return response()->json(Cliente::select(['id', 'nombre'])->get(), 200);
   }
